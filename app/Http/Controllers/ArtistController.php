@@ -18,33 +18,44 @@ class ArtistController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
     public function create()
     {
-        //
+        return view('artists.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
-        //
+        $artist = new Artist();
+        $artist->firstname = $request->firstname;
+        $artist->lastname = $request->lastname;
+        $artist->save();
+
+        return redirect()->route('artists.index')->with('success', 'Artiste créé avec succès.');
     }
+
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $artist = Artist::findOrFail($id);
+        return view('artists.show', compact('artist'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $artist = Artist::findOrFail($id);
+        return view('artists.edit', compact('artist'));
     }
 
     /**

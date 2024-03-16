@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Artist extends Model
+class Type extends Model
 {
     use HasFactory;
     /**
@@ -15,14 +14,14 @@ class Artist extends Model
      *
      * @var array
      */
-    protected $fillable = ['firstname', 'lastname'];
+    protected $fillable = ['type'];
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'artists';
+    protected $table = 'types';
 
     /**
      * Indicates if the model should be timestamped.
@@ -32,9 +31,8 @@ class Artist extends Model
     public $timestamps = false;
 
 
-
-    public function types(): BelongsToMany
+    public function artists(): BelongsToMany
     {
-        return $this->belongsToMany(Type::class);
+        return $this->belongsToMany(Artist::class);
     }
 }
