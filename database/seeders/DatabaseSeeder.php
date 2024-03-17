@@ -21,9 +21,11 @@ class DatabaseSeeder extends Seeder
         ]);
         */
         $this->call([
+            UserSeeder::class,
             ArtistSeeder::class,
             TypeSeeder::class,
             ArtistTypeSeeder::class,
+            LocalitySeeder::class,
 
         ]);
     }
