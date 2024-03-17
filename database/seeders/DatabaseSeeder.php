@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Location;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -27,6 +28,8 @@ class DatabaseSeeder extends Seeder
             ArtistTypeSeeder::class,
             LocalitySeeder::class,
             RoleSeeder::class,
+            LocationSeeder::class,
+
 
         ]);
     }
