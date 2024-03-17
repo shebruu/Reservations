@@ -2,22 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Type;
 use Illuminate\Http\Request;
+use App\Models\Role;
 
-class TypeController extends Controller
+class Rolecontroller extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $types = Type::all();
-
-        return view('type.index', [
-            'types' => $types,
-            'resource' => 'types',
-        ]);
+        //
     }
 
     /**
@@ -39,19 +34,15 @@ class TypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(string $id)
     {
-        $type = Type::find($id);
-
-        return view('type.show', [
-            'type' => $type,
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(string $id)
     {
         //
     }
@@ -59,7 +50,7 @@ class TypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Type $type)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -67,7 +58,7 @@ class TypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Type $type)
+    public function destroy(string $id)
     {
         //
     }

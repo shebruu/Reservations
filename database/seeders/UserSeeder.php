@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
     {
         $dataset = [
             [
-                'name' => 'John Doe',
+                'name' => 'John ',
                 'email' => 'john.doe@example.com',
                 'password' => Hash::make('password'),
             ],
@@ -27,12 +27,19 @@ class UserSeeder extends Seeder
                 'email' => 'sara.doe@example.com',
                 'password' => Hash::make('password'),
             ],
-            // Vous pouvez ajouter autant d'utilisateurs que vous voulez ici
-        ];
 
-        // Bulk insert users
+        ];
         foreach ($dataset as $data) {
-            User::create($data);
+            // Vérifie si l'utilisateur existe déjà par son email
+            $user = User::where('email', $data['email'])->first();
+
+            if (!$user) {
+                // Si l'utilisateur n'existe pas, on le crée
+                User::create($data);
+            } else {
+                //mise a jour
+                // $user->update($data);
+            }
         }
     }
 }
