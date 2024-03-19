@@ -6,7 +6,15 @@
 <h1>Liste des artistes</h1>
 
 <a href="{{ route('artists.create') }}">Ajouter un nouvel artiste</a>
+{{-- Point d'ancrage pour le composant React --}}
 
+<div id="app"></div>
+
+
+{{-- Transférer les données des artistes à React --}}
+<script>
+    window.artists = @json($artists);
+</script>
 <table>
     <thead>
         <tr>
