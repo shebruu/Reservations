@@ -30,8 +30,8 @@ class ShowSeeder extends Seeder
                 'slug' => null, 'title' => 'Ayiti', 'description' => "Un homme est bloqué à l’aéroport.\n "
                     . 'Questionné par les douaniers, il doit alors justifier son identité, '
                     . 'et surtout prouver qu\'il est haïtien – qu\'est-ce qu\'être haïtien ?',
-                'poster_url' => 'ayiti.jpg',
-                'poster_url' => 'ayiti.jpg',
+                'title' => 'Ayiti',
+                'poster_url' => 'ayiti.jpeg',
                 'location_slug' => 'espace-devaux-la-venerie',
                 'bookable' => true,
                 'price' => 8.50,
@@ -42,7 +42,7 @@ class ShowSeeder extends Seeder
                 'title' => 'Cible mouvante',
                 'description' => 'Dans ce « thriller d’anticipation », des adultes semblent alimenter '
                     . 'et véhiculer une crainte féroce envers les enfants âgés entre 10 et 12 ans.',
-                'poster_url' => 'cible.jpg',
+                'poster_url' => 'cible.jpeg',
                 'location_slug' => 'dexia-art-center',
                 'bookable' => true,
                 'price' => 9.00,
@@ -54,7 +54,7 @@ class ShowSeeder extends Seeder
                     . 'et Maigret (pour le réalisme mélancolique), ce dixième opus semalien propose '
                     . 'quatorze nouvelles chansons mêlées à de petits textes humoristiques et '
                     . 'à quelques fortes images poétiques.',
-                'poster_url' => 'claudebelgesaison220.jpg',
+                'poster_url' => 'claudebelgesaison220.jpeg',
                 'location_slug' => null,
                 'bookable' => false,
                 'price' => 5.50,
@@ -65,7 +65,7 @@ class ShowSeeder extends Seeder
                 'title' => 'Manneke… !',
                 'description' => 'A tour de rôle, Pierre se joue de ses oncles, '
                     . 'tantes, grands-parents et surtout de sa mère.',
-                'poster_url' => 'wayburn.jpg',
+                'poster_url' => 'wayburn.jpeg',
                 'location_slug' => 'la-samaritaine',
                 'bookable' => true,
                 'price' => 10.50,
