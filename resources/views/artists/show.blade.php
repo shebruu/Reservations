@@ -7,6 +7,7 @@
 
 {{ dump($artist) }}
 
+
 <div><a href="{{ route('artist.edit'), $artist->id }}">Modifier un nouvel artiste</a> </div>
 
 <form method="post" action="{{ route ('artist.delete', artist->id) }}">

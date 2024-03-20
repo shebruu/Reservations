@@ -5,7 +5,7 @@
 @section('content')
 <h1>Liste des artistes</h1>
 
-<a href="{{ route('artists.create') }}">Ajouter un nouvel artiste</a>
+<a href="{{ route('artist.create') }}">Ajouter un nouvel artiste</a>
 {{-- Point d'ancrage pour le composant React --}}
 
 <div id="app"></div>
@@ -29,8 +29,8 @@
             <td>{{ $artist->firstname }}</td>
             <td>{{ $artist->lastname }}</td>
             <td>
-                <a href="{{ route('artists.edit', $artist->id) }}">Éditer</a>
-                <form action="{{ route('artists.destroy', $artist->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr ?');">
+                <a href="{{ route('artist.edit', $artist->id) }}">Éditer</a>
+                <form action="{{ route('artist.destroy', $artist->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr ?');">
                     @csrf
                     @method('DELETE')
                     <button type="submit">Supprimer</button>

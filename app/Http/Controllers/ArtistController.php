@@ -35,7 +35,7 @@ class ArtistController extends Controller
         $artist->lastname = $request->lastname;
         $artist->save();
 
-        return redirect()->route('artists.index')->with('success', 'Artiste créé avec succès.');
+        return redirect()->route('artist.index')->with('success', 'Artiste créé avec succès.');
     }
 
 

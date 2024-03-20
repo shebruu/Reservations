@@ -6,7 +6,7 @@
 @section('content')
 <h1>Créer un nouvel artiste</h1>
 
-<form action="{{ route('artists.store') }}" method="POST">
+<form action="{{ route('artist.store') }}" method="POST">
     @csrf
     <div>
         <label for="firstname">Prénom :</label>
