@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Show;
+use App\Models\Location;
 
 class ShowController extends Controller
 {
@@ -47,10 +48,25 @@ class ShowController extends Controller
      */
     public function show($id)
     {
+
         $show = Show::find($id);
+        // $show = Show::with('location')->find($id);
+        //dd($show->location);
+        // $location = Location::find($show->location_id);
+        // dd($location);
+        //Récupérer les artistes du spectacle et les grouper par type
+        $collaborateurs = [];
+
+        foreach ($show->artistTypes as $at) {
+            $collaborateurs[$at->type->type][] = $at->artist;
+        }
+
 
         return view('show.show', [
             'show' => $show,
+            'collaborateurs' => $collaborateurs,
+
+
         ]);
     }
 

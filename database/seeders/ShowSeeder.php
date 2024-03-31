@@ -27,12 +27,13 @@ class ShowSeeder extends Seeder
         $shows = [
 
             [
-                'slug' => null, 'title' => 'Ayiti', 'description' => "Un homme est bloqué à l’aéroport.\n "
+                'slug' => null,
+                'title' => 'Ayiti',
+                'description' => "Un homme est bloqué à l’aéroport.\n "
                     . 'Questionné par les douaniers, il doit alors justifier son identité, '
                     . 'et surtout prouver qu\'il est haïtien – qu\'est-ce qu\'être haïtien ?',
-                'title' => 'Ayiti',
                 'poster_url' => 'ayiti.jpeg',
-                'location_slug' => 'espace-devaux-la-venerie',
+                'location_slug' => 'espace-delvaux-la-venerie',
                 'bookable' => true,
                 'price' => 8.50,
             ],
