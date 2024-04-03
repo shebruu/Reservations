@@ -50,10 +50,19 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the representations in this location.
+     * Get the role in this User.
      */
     public function Roles()
     {
         return $this->hasMany(Role::class);
+    }
+
+
+    /**
+     * Get the representations in this User.
+     */
+    public function Representations()
+    {
+        return $this->hasMany(Representation::class);
     }
 }

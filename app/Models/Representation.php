@@ -49,4 +49,13 @@ class Representation extends Model
     {
         return $this->belongsTo(Show::class);
     }
+
+
+    /**
+     * Get the user in this Represetation.
+     */
+    public function Users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

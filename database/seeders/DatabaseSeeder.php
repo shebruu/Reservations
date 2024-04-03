@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             RepresentationSeeder::class,
             ArtistTypeShowSeeder::class,
             RoleUserSeeder::class,
+            RepresentationUserSeeder::class,
 
         ]);
     }
