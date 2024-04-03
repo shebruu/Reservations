@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Facades\Schema; // Assurez-vous d'importer Schema
 use App\Models\Role;
 
 class RoleSeeder extends Seeder
@@ -15,8 +17,14 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::truncate();
 
+
+        Schema::disableForeignKeyConstraints();
+
+        // Votre logique de nettoyage pour roles ici
+        DB::table('roles')->truncate();
+
+        Schema::enableForeignKeyConstraints();
         //Define data
         $dataset = [
             ['role' => 'admin'],

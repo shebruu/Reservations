@@ -180,6 +180,8 @@ class ArtistTypeShowSeeder extends Seeder
 
                 // Insérez les données dans 'artist_type_show'
                 DB::table('artist_type_show')->insert($insertData);
+
+
                 Log::info('Insertion réussie dans artist_type_show', $insertData);
             } else {
                 // Logique pour gérer l'absence d'artiste, de type ou de spectacle

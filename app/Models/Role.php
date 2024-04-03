@@ -16,4 +16,12 @@ class Role extends Model
 
 
     public $timestamps = false;
+
+    /**
+     * Get the representations in this location.
+     */
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

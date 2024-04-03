@@ -18,12 +18,18 @@ class UserSeeder extends Seeder
     {
         $dataset = [
             [
-                'name' => 'John ',
+                'firstname' => 'john ',
+                'lastname' => 'loga ',
                 'email' => 'john.doe@example.com',
+                'login' => 'johny4',
+                'langue' => 'fr',
                 'password' => Hash::make('password'),
             ],
             [
-                'name' => 'sara',
+                'firstname' => 'sara',
+                'lastname' => 'wysk',
+                'login' => 'wysky3',
+                'langue' => 'fr',
                 'email' => 'sara.doe@example.com',
                 'password' => Hash::make('password'),
             ],
