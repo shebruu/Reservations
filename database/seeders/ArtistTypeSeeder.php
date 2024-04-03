@@ -136,7 +136,7 @@ class ArtistTypeSeeder extends Seeder
 
 
             if (!is_array($record['type'])) {
-                $record['type'] = [$record['type']]; // Assurez-vous que c'est un tableau
+                $record['type'] = [$record['type']];
             }
 
             foreach ($record['type'] as $typeName) {

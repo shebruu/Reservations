@@ -149,43 +149,33 @@ class ArtistTypeShowSeeder extends Seeder
             ],
         ];
 
-        //Prepare the data
+
         foreach ($artistTypeShows as $data) {
-            // Vérifiez si l'artiste existe
-            $artistExists = Artist::where('firstname', $data['firstname'])->where('lastname', $data['lastname'])->exists();
 
-            // Vérifiez si le type existe
-            $typeExists = Type::where('type', $data['type'])->exists();
+            $artistId = DB::table('artists')
+                ->where('firstname', $data['firstname'])
+                ->where('lastname', $data['lastname'])
+                ->value('id');
 
-            // Vérifiez si le spectacle existe
-            $showExists = Show::where('slug', $data['show_slug'])->exists();
+            $typeId = DB::table('types')
+                ->where('type', $data['type'])
+                ->value('id');
 
-            if ($artistExists && $typeExists && $showExists) {
-                // Obtenez les IDs nécessaires
-                $artist = Artist::where('firstname', $data['firstname'])->where('lastname', $data['lastname'])->first();
-                $type = Type::where('type', $data['type'])->first();
-                $show = Show::where('slug', $data['show_slug'])->first();
+            $showId = DB::table('shows')
+                ->where('slug', $data['show_slug'])
+                ->value('id');
 
-                // Créez ou trouvez la relation artist_type
-                $artistType = ArtistType::firstOrCreate([
-                    'artist_id' => $artist->id,
-                    'type_id' => $type->id,
+            if ($artistId && $typeId && $showId) {
+
+                $artistTypeId = ArtistType::firstOrCreate([
+                    'artist_id' => $artistId,
+                    'type_id' => $typeId,
                 ]);
 
-                // Préparez les données pour l'insertion
-                $insertData = [
-                    'artist_type_id' => $artistType->id,
-                    'show_id' => $show->id,
-                ];
-
-                // Insérez les données dans 'artist_type_show'
-                DB::table('artist_type_show')->insert($insertData);
-
-
-                Log::info('Insertion réussie dans artist_type_show', $insertData);
-            } else {
-                // Logique pour gérer l'absence d'artiste, de type ou de spectacle
-                Log::warning("Élément manquant pour l'insertion", ['artist' => $data['firstname'] . ' ' . $data['lastname'], 'type' => $data['type'], 'show' => $data['show_slug']]);
+                DB::table('artist_type_show')->insert([
+                    'artist_type_id' => $artistTypeId->id,
+                    'show_id' => $showId,
+                ]);
             }
         }
     }

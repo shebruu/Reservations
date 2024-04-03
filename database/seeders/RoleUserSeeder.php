@@ -37,27 +37,21 @@ class RoleUserSeeder extends Seeder
         ];
 
 
-
         foreach ($data as $userData) {
-            // Assurez-vous que l'utilisateur et le rôle existent
-            $user = User::where(
-                'firstname',
-                $userData['firstname']
-            )->where(
-                'lastname',
-                $userData['lastname']
-            )->first();
+            $userId = DB::table('users')
+                ->where('firstname', $userData['firstname'])
+                ->where('lastname', $userData['lastname'])
+                ->value('id');
 
-            $role = Role::where(
-                'role',
-                $userData['role']
-            )->first();
+            $roleId = DB::table('roles')
+                ->where('role', $userData['role'])
+                ->value('id');
 
-            if ($user && $role) {
-                DB::table('user_role')->updateOrInsert([
-                    'user_id' => $user->id,
-                    'role_id' => $role->id,
-                ]);
+            if ($userId && $roleId) {
+                DB::table('user_role')->updateOrInsert(
+                    ['user_id' => $userId, 'role_id' => $roleId],
+                    ['user_id' => $userId, 'role_id' => $roleId]
+                );
             }
         }
     }
