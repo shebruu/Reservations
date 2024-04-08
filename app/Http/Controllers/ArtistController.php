@@ -30,6 +30,10 @@ class ArtistController extends Controller
 
     public function store(Request $request)
     {
+        // Valider les données requises
+
+
+        // Créer et sauvegarder l'artiste avec les données validées
         $artist = new Artist();
         $artist->firstname = $request->firstname;
         $artist->lastname = $request->lastname;
@@ -37,6 +41,8 @@ class ArtistController extends Controller
 
         return redirect()->route('artist.index')->with('success', 'Artiste créé avec succès.');
     }
+
+
 
 
     /**
@@ -71,6 +77,9 @@ class ArtistController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $artist = Artist::findOrFail($id);
+        $artist->delete();
+
+        return redirect()->route('artist.index')->with('success', 'Artiste supprimé avec succès.');
     }
 }

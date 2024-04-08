@@ -11,10 +11,9 @@
 <div id="app"></div>
 
 
-{{-- Transférer les données des artistes à React --}}
-<script>
-    window.artists = @json($artists);
-</script>
+{{-- Transférer les données des artistes à React 
+
+--}}
 <table>
     <thead>
         <tr>
