@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Artist;
 
+use App\Http\Requests\ArtistRequest;
+
 class ArtistController extends Controller
 {
     /**
@@ -28,17 +30,18 @@ class ArtistController extends Controller
      * Store a newly created resource in storage.
      */
 
-    public function store(Request $request)
+    public function store(ArtistRequest $request)
     {
         // Valider les données requises
 
+        $artist = Artist::create($request->validated());
 
-        // Créer et sauvegarder l'artiste avec les données validées
+        /* Créer et sauvegarder l'artiste avec les données validées
         $artist = new Artist();
         $artist->firstname = $request->firstname;
         $artist->lastname = $request->lastname;
         $artist->save();
-
+*/
         return redirect()->route('artist.index')->with('success', 'Artiste créé avec succès.');
     }
 
@@ -74,29 +77,23 @@ class ArtistController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function update(Request $request, string $id)
+    public function update(ArtistRequest $request, string $id)
     {
-        //Validation des données du formulaire
-        $validated = $request->validate([
-            'firstname' => 'required|max:60',
-            'lastname' => 'required|max:60',
-        ]);
-
-        //Le formulaire a été validé, nous récupérons l’artiste à modifier
+        // Récupérer l'artiste à modifier
         $artist = Artist::find($id);
 
-        //Mise à jour des données modifiées et sauvegarde dans la base de données
-        $artist->update($validated);
+        // Mise à jour des données et sauvegarde dans la base de données avec des données déjà validées.
+        $artist->update($request->validated());
 
-        return view('artists.show', [
+        return redirect()->route('artist.show', [
             'artist' => $artist,
-        ]);
+        ])->with('success', 'Artiste mis à jour avec succès.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         $artist = Artist::findOrFail($id);
         $artist->delete();

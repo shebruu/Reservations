@@ -32,7 +32,7 @@ class ShowSeeder extends Seeder
                 'description' => "Un homme est bloqué à l’aéroport.\n "
                     . 'Questionné par les douaniers, il doit alors justifier son identité, '
                     . 'et surtout prouver qu\'il est haïtien – qu\'est-ce qu\'être haïtien ?',
-                'poster_url' => 'ayiti.jpeg',
+                'poster_url' => 'ayiti.jpg',
                 'location_slug' => 'espace-delvaux-la-venerie',
                 'bookable' => true,
                 'price' => 8.50,
@@ -55,7 +55,7 @@ class ShowSeeder extends Seeder
                     . 'et Maigret (pour le réalisme mélancolique), ce dixième opus semalien propose '
                     . 'quatorze nouvelles chansons mêlées à de petits textes humoristiques et '
                     . 'à quelques fortes images poétiques.',
-                'poster_url' => 'claudebelgesaison220.jpeg',
+                'poster_url' => 'claudebelgesaison.jpg',
                 'location_slug' => null,
                 'bookable' => false,
                 'price' => 5.50,
@@ -66,7 +66,7 @@ class ShowSeeder extends Seeder
                 'title' => 'Manneke… !',
                 'description' => 'A tour de rôle, Pierre se joue de ses oncles, '
                     . 'tantes, grands-parents et surtout de sa mère.',
-                'poster_url' => 'wayburn.jpeg',
+                'poster_url' => 'maneke.jpg',
                 'location_slug' => 'la-samaritaine',
                 'bookable' => true,
                 'price' => 10.50,

@@ -2,26 +2,42 @@
 
 @section('title', 'Liste des spectacles')
 
+
+
+@push('styles')
+<style>
+    .custom-img-size {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+    }
+</style>
+@endpush
 @section('content')
-<h1>Liste des {{ $resource }}</h1>
-<ul>
-    @foreach($shows as $show)
-    <li>
-        <a href="{{ route('show.show', $show->id) }}">{{ $show->title }}</a>
-        @if($show->bookable)
-        <span>{{ $show->price }} €</span>
-        @endif
-
-
-        @if($show->representations->count()==1)
-        - <span>1 représentation</span>
-        @elseif($show->representations->count()>1)
-        - <span>{{ $show->representations->count() }} représentations</span>
-        @else
-        - <em>aucune représentation</em>
-        @endif
-
-    </li>
-    @endforeach
-</ul>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Liste des spectacles</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach($shows as $show)
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{ asset('images/'.$show->poster_url) }}" class="card-img-top custom-img-size" alt="Image du spectacle">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $show->title }}</h5>
+                    <p class="card-text">{{ $show->price }} €</p>
+                    <p class="card-text">
+                        @if($show->representations->count() === 1)
+                        1 représentation
+                        @elseif($show->representations->count() > 1)
+                        {{ $show->representations->count() }} représentations
+                        @else
+                        aucune représentation
+                        @endif
+                    </p>
+                    <a href="{{ route('show.show', $show->id) }}" class="btn btn-primary">Voir plus</a>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
 @endsection

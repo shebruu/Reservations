@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Show;
 use App\Models\Location;
 
+use App\Http\Requests\ShowRequest;
+
 class ShowController extends Controller
 {
 
@@ -35,9 +37,10 @@ class ShowController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ShowRequest $request)
     {
-        //
+        $show = Show::create($request->validated());
+        return redirect()->route('show.index')->with('success', 'Spectacle créé avec succès.');
     }
 
     /**
@@ -50,10 +53,7 @@ class ShowController extends Controller
     {
 
         $show = Show::find($id);
-        // $show = Show::with('location')->find($id);
-        //dd($show->location);
-        // $location = Location::find($show->location_id);
-        // dd($location);
+
         //Récupérer les artistes du spectacle et les grouper par type
         $collaborateurs = [];
 
@@ -78,13 +78,17 @@ class ShowController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\ShowRequest  $request
+     * @param  \App\Models\Show  $show
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(ShowRequest $request, Show $show)
     {
-        //
+        $show->update($request->validated());
+        return redirect()->route('show.index')->with('success', 'Spectacle mis à jour avec succès.');
     }
 
     /**
@@ -92,6 +96,10 @@ class ShowController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $show = Show::findOrFail($id);
+        $show->delete();
+
+        // Rediriger vers la liste des spectacles avec un message de succès
+        return redirect()->route('show.index')->with('success', 'Spectacle supprimé avec succès.');
     }
 }
