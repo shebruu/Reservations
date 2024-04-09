@@ -32,6 +32,13 @@ class UserSeeder extends Seeder
                 'langue' => 'fr',
                 'email' => 'sara.doe@example.com',
                 'password' => Hash::make('password'),
+            ],   [
+                'firstname' => 'ebru',
+                'lastname' => 'sahin',
+                'login' => 'ebsahin',
+                'langue' => 'fr',
+                'email' => 'ebsahinn7887@outlook.com',
+                'password' => Hash::make('password'),
             ],
 
         ];
@@ -42,9 +49,6 @@ class UserSeeder extends Seeder
             if (!$user) {
                 // Si l'utilisateur n'existe pas, on le crée
                 User::create($data);
-            } else {
-                //mise a jour
-                // $user->update($data);
             }
         }
     }
