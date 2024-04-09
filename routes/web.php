@@ -47,6 +47,8 @@ Route::get('/artist/{id}', [ArtistController::class, 'show'])
     ->where('id', '[0-9]+')->name('artist.show');
 
 Route::delete('/artist/{id}', [ArtistController::class, 'destroy'])->name('artist.destroy');
+
+
 Route::get('/artist/edit/{id}', [App\Http\Controllers\ArtistController::class, 'edit'])
     ->where('id', '[0-9]+')->name('artist.edit');
 Route::put('/artist/{id}', [App\Http\Controllers\ArtistController::class, 'update'])

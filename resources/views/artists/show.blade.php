@@ -14,7 +14,7 @@
 </ul>
 
 
-
+<div><a href="{{ route('artist.edit' ,$artist->id) }}">Modifier</a></div>
 
 <nav> <a href="{{ route ('artist.index')}}"> Retour a la liste des artistes (index) <a></nav>
 @endsection
