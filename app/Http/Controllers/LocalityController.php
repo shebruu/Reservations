@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Locality;
+use App\Http\Requests\LocalitiesRequest;
+
 class LocalityController extends Controller
 {
     /**
@@ -25,9 +28,15 @@ class LocalityController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(LocalitiesRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $locality = new Locality();
+        $locality->fill($validated);
+        $locality->save();
+
+        return redirect()->route('locality.index');
     }
 
     /**
@@ -49,10 +58,16 @@ class LocalityController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(LocalitiesRequest $request, Locality $locality)
     {
-        //
+        $validated = $request->validated();
+
+        $locality->fill($validated);
+        $locality->save();
+
+        return redirect()->route('locality.show', $locality->id);
     }
+
 
     /**
      * Remove the specified resource from storage.

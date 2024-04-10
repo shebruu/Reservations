@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Cashier\Cashier;
 use App\Models\User;
 
+
 class AppServiceProvider extends ServiceProvider
 {
     /**

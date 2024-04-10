@@ -85,7 +85,7 @@ class ArtistController extends Controller
         // Mise à jour des données et sauvegarde dans la base de données avec des données déjà validées.
         $artist->update($request->validated());
 
-        return redirect()->route('artist.show', [
+        return redirect()->route('artist.index', [
             'artist' => $artist,
         ])->with('success', 'Artiste mis à jour avec succès.');
     }
