@@ -3,14 +3,13 @@
 @section('title', 'Liste des artistes')
 
 @push('styles')
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
 <style>
     .table-responsive {
-        border-radius: 5px;
+        @apply rounded-lg;
         background-color: #fff;
         padding: 20px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        /* Ombre légère pour le tableau */
+        @apply shadow;
     }
 
     .page-heading {
@@ -19,11 +18,11 @@
     }
 
     .btn-primary {
-        background-color: #007bff;
+        @apply bg-blue-500 text-white;
     }
 
     .btn-danger {
-        background-color: #dc3545;
+        @apply bg-red-500 text-white;
     }
 
     /* Autres styles personnalisés */
@@ -36,7 +35,7 @@
     <a href="{{ route('artist.create') }}" class="btn btn-success mb-3">Ajouter un nouvel artiste</a>
     <div class="table-responsive">
         <table class="table">
-            <thead class="thead-dark">
+            <thead class="bg-gray-800 text-white">
                 <tr>
                     <th scope="col">Prénom</th>
                     <th scope="col">Nom</th>
@@ -44,13 +43,17 @@
                 </tr>
             </thead>
             <tbody>
+
+
                 @foreach ($artists as $artist)
                 <tr>
                     <td>{{ $artist->firstname }}</td>
                     <td>{{ $artist->lastname }}</td>
                     <td>
+                        <a href="{{ route('artist.show', $artist->id) }}" class="btn btn-secondary">Détail</a>
+
                         <a href="{{ route('artist.edit', $artist->id) }}" class="btn btn-primary btn-sm">Éditer</a>
-                        <form action="{{ route('artist.destroy', $artist->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr ?');" class="d-inline">
+                        <form action="{{ route('artist.destroy', $artist->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr ?');" class="inline-block">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>

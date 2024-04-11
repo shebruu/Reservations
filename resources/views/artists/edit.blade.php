@@ -57,7 +57,7 @@
 <div class="edit-artist-form">
     <h2>Modifier un artiste</h2>
 
-    <form action="{{ route('artist.update', $artist->id) }}" method="post">
+    <form action="{{ route('artist.update', $artist->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">

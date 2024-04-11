@@ -36,24 +36,23 @@ Route::resource('artist', ArtistController::class);
 */
 
 Route::get('/artist', [ArtistController::class, 'index'])->name('artist.index');
+
+Route::get('/artist/{id}', [ArtistController::class, 'show'])
+    ->where('id', '[0-9]+')->name('artist.show');
+Route::delete('/artist/{id}', [ArtistController::class, 'destroy'])->name('artist.destroy');
+
+Route::get('/artist/edit/{id}', [ArtistController::class, 'edit'])
+    ->where('id', '[0-9]+')->name('artist.edit');
+Route::put('/artist/{id}', [ArtistController::class, 'update'])
+    ->where('id', '[0-9]+')->name('artist.update');
+
+
+
 Route::get('/artist/create', [ArtistController::class, 'create'])
     ->name('artist.create');
 
 Route::post('/artist', [ArtistController::class, 'store'])
     ->name('artist.store');
-
-
-Route::get('/artist/{id}', [ArtistController::class, 'show'])
-    ->where('id', '[0-9]+')->name('artist.show');
-
-Route::delete('/artist/{id}', [ArtistController::class, 'destroy'])->name('artist.destroy');
-
-
-Route::get('/artist/edit/{id}', [App\Http\Controllers\ArtistController::class, 'edit'])
-    ->where('id', '[0-9]+')->name('artist.edit');
-Route::put('/artist/{id}', [App\Http\Controllers\ArtistController::class, 'update'])
-    ->where('id', '[0-9]+')->name('artist.update');
-
 
 
 
@@ -75,9 +74,17 @@ Route::get('location/{id}', [LocationController::class, 'show'])
     ->where('id', '[0-9]+')->name('location.show');
 
 
+
+
+
 Route::get('/show', [ShowController::class, 'index'])->name('show.index');
 Route::get('/show/{id}', [ShowController::class, 'show'])
     ->where('id', '[0-9]+')->name('show.show');
+
+Route::get('/show/edit/{id}', [ShowController::class, 'edit'])
+    ->where('id', '[0-9]+')->name('show.edit');
+Route::put('/show/{id}', [ShowController::class, 'update'])
+    ->where('id', '[0-9]+')->name('show.update');
 
 
 
@@ -86,5 +93,9 @@ Route::get('/representation', [RepresentationController::class, 'index'])
 Route::get('/representation/{id}', [RepresentationController::class, 'show'])
     ->where('id', '[0-9]+')->name('representation.show');
 
+Route::get('/representation/edit/{id}', [RepresentationController::class, 'edit'])
+    ->where('id', '[0-9]+')->name('representation.edit');
+Route::put('/representation/{id}', [RepresentationController::class, 'update'])
+    ->where('id', '[0-9]+')->name('representation.update');
 
 require __DIR__ . '/auth.php';
