@@ -34,6 +34,13 @@ Route::middleware('auth')->group(function () {
 /*
 Route::resource('artist', ArtistController::class);
 */
+/**  user managment route only for admin */
+Route::middleware('isAdmin')->group(function () {
+    Route::get('/admin/users', function () {
+        return view('admin.users');
+    });
+});
+
 
 Route::get('/artist', [ArtistController::class, 'index'])->name('artist.index');
 
