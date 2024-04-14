@@ -9,11 +9,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('show.index') }}">Spectacles</a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('profile.edit') }}">Profil</a>
+                    <a class="nav-link" href="{{ route('representation.index') }}">Reservations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('representation.index') }}">Représentations</a>
+                    <a class="nav-link" href="{{ route('profile.edit') }}">Profil</a>
                 </li>
             </ul>
         </div>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Representation;
 use Carbon\Carbon;
 
+use App\Http\Requests\RepresentationRequest;
+
 class RepresentationController extends Controller
 {
 
@@ -48,4 +50,25 @@ class RepresentationController extends Controller
             'time' => $time,
         ]);
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\StoreRepresentationRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(RepresentationRequest $request)
+    {
+        $representation = new Representation($request->validated());
+        $representation->save();
+
+        return redirect()->route('representations.index')->with('success', 'Représentation créée avec succès.');
+    }
+
+    /*
+    public function update(Request request,id){
+
+
+    }
+    */
 }

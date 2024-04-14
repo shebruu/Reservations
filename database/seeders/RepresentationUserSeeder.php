@@ -21,7 +21,7 @@ class RepresentationUserSeeder extends Seeder
 
 
         Schema::disableForeignKeyConstraints();
-        DB::table('representation_user')->delete();
+        DB::table('reservations')->delete();
         Schema::enableForeignKeyConstraints();
 
 
@@ -29,6 +29,19 @@ class RepresentationUserSeeder extends Seeder
             [
                 'user_login' => 'johny4',
                 'show_title' => 'ayiti',
+                'representation_when' => '2012-10-12 13:30',
+                'places' => 2
+            ],
+
+            [
+                'user_login' => 'wysky3',
+                'show_title' => 'Cible mouvante',
+                'representation_when' => '2012-10-02 20:30',
+                'places' => 3
+            ],
+            [
+                'user_login' => 'ebsahin',
+                'show_title' => 'Manneke… !',
                 'representation_when' => '2012-10-12 20:30',
                 'places' => 2
             ],
@@ -45,12 +58,11 @@ class RepresentationUserSeeder extends Seeder
                 ->value('representations.id');
 
             if ($userId && $representationId) {
-                DB::table('representation_user')->updateOrInsert(
+                DB::table('reservations')->insert(
                     [
                         'user_id' => $userId,
                         'representation_id' => $representationId,
-                    ],
-                    [
+
                         'places' => $data['places']
                     ]
                 );

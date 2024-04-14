@@ -47,6 +47,7 @@ class RepresentationSeeder extends Seeder
                 'show_slug' => 'ceci-nest-pas-un-chanteur-belge',
                 'when' => '2012-10-16 20:30',
             ],
+
         ];
 
         //prepare data
