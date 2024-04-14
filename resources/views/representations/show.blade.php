@@ -19,10 +19,21 @@
             </p>
             <!-- Bouton de réservation -->
             <div class="d-flex justify-content-between align-items-center mt-4">
+                @can('can-reserve')
+                <form method="POST" action="{{ route('representation.book', $representation->id) }}">
+                    @csrf
+                    <label for="places">Nombre de places:</label>
+                    <input type="number" id="places" name="places" value="1" min="1" required>
+
+                    <button type="submit" class="btn btn-primary">Réserver maintenant</button>
+                </form>
+                @endcan
                 <a href="{{ route('representation.index') }}" class="btn btn-secondary">Retour à l'index</a>
 
             </div>
         </div>
     </div>
+
+
 </article>
 @endsection

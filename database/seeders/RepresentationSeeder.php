@@ -33,20 +33,31 @@ class RepresentationSeeder extends Seeder
                 'when' => '2012-10-12 13:30',
             ],
             [
+                'location_slug' => 'espace-delvaux-la-venerie',
+                'show_slug' => 'cible-mouvante',
+                'when' => '2012-10-09 20:30',
+            ],
+            [
                 'location_slug' => 'dexia-art-center',
                 'show_slug' => 'ayiti',
                 'when' => '2012-10-12 20:30',
             ],
             [
-                'location_slug' => null,
+                'location_slug' => 'dexia-art-center',
                 'show_slug' => 'cible-mouvante',
                 'when' => '2012-10-02 20:30',
+            ],
+            [
+                'location_slug' => 'dexia-art-center',
+                'show_slug' => 'cible-mouvante',
+                'when' => '2012-10-09 20:30',
             ],
             [
                 'location_slug' => null,
                 'show_slug' => 'ceci-nest-pas-un-chanteur-belge',
                 'when' => '2012-10-16 20:30',
             ],
+
 
         ];
 

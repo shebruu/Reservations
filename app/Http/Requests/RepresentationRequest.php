@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class RepresentationRequest extends FormRequest
 {
@@ -11,7 +12,8 @@ class RepresentationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        // Accès autorisé uniquement pour les utilisateurs connectés avec les rôles 'membre' ou 'affiliate
+        return Auth::check() && (Auth::user()->role === 'admin');
     }
 
     /**

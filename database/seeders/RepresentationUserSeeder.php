@@ -32,12 +32,24 @@ class RepresentationUserSeeder extends Seeder
                 'representation_when' => '2012-10-12 13:30',
                 'places' => 2
             ],
+            [
+                'user_login' => 'alice2024',
+                'show_title' => 'ayiti',
+                'representation_when' => '2012-10-12 13:30',
+                'places' => 1
+            ],
 
             [
                 'user_login' => 'wysky3',
                 'show_title' => 'Cible mouvante',
                 'representation_when' => '2012-10-02 20:30',
                 'places' => 3
+            ],
+            [
+                'user_login' => 'bob2024',
+                'show_title' => 'cible-mouvante',
+                'representation_when' => '2012-10-09 20:30',
+                'places' => 2
             ],
             [
                 'user_login' => 'ebsahin',

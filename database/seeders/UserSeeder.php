@@ -32,13 +32,38 @@ class UserSeeder extends Seeder
                 'langue' => 'fr',
                 'email' => 'sara.doe@example.com',
                 'password' => Hash::make('password'),
-            ],   [
+            ],
+            [
                 'firstname' => 'ebru',
                 'lastname' => 'sahin',
                 'login' => 'ebsahin',
                 'langue' => 'fr',
                 'email' => 'ebsahinn7887@outlook.com',
                 'password' => Hash::make('password'),
+            ],
+            [
+                'firstname' => 'Alice',
+                'lastname' => 'Merton',
+                'email' => 'alice.merton@example.com',
+                'login' => 'alice2024',
+                'langue' => 'en',
+                'password' => Hash::make('alicepassword'),
+            ],
+            [
+                'firstname' => 'Bob',
+                'lastname' => 'Marley',
+                'email' => 'bob.marley@example.com',
+                'login' => 'bob2024',
+                'langue' => 'en',
+                'password' => Hash::make('bobpassword'),
+            ],
+            [
+                'firstname' => 'Clara',
+                'lastname' => 'Smith',
+                'email' => 'clara.smith@example.com',
+                'login' => 'clara2024',
+                'langue' => 'fr',
+                'password' => Hash::make('clarapassword'),
             ],
 
         ];
