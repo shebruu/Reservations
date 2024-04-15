@@ -106,6 +106,6 @@ Route::put('/representation/{id}', [RepresentationController::class, 'update'])
     ->where('id', '[0-9]+')->name('representation.update');
 
 
-Route::post('/representations/{id}/book', 'RepresentationController@book')->name('representation.book')->middleware('auth');
+Route::post('/representations/{id}/book', [RepresentationController::class, 'book'])->name('representation.book')->middleware('auth');
 
 require __DIR__ . '/auth.php';

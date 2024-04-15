@@ -25,8 +25,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Cashier::useCustomerModel(User::class);
 
+
         Gate::define('can-reserve', function ($user) {
-            return in_array($user->role, ['admin', 'affiliate']);
+            return $user->hasRole('member') || $user->hasRole('affiliate');
         });
     }
 }

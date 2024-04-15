@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Representation;
 use App\Models\Show;
+use App\Models\Reservation;
 use Carbon\Carbon;
 
 use App\Http\Requests\RepresentationRequest;
@@ -64,7 +65,7 @@ class RepresentationController extends Controller
         $representation = new Representation($request->validated());
         $representation->save();
 
-        return redirect()->route('representations.index')->with('success', 'Représentation créée avec succès.');
+        return redirect()->route('representation.index')->with('success', 'Représentation créée avec succès.');
     }
 
     /*
@@ -84,8 +85,9 @@ class RepresentationController extends Controller
         $representation = Representation::findOrFail($id);
 
         // Vérifier si la représentation est réservable
-        if (!$representation->bookable) {
-            return redirect()->route('representations.show', $id)->with('error', 'Cette représentation n\'est pas réservable.');
+        if (!$representation->show->bookable) {
+            return redirect()->route('representation.show', $id)
+                ->with('error', 'Cette représentation n\'est pas réservable.');
         }
 
         // Créer une nouvelle réservation
@@ -98,7 +100,7 @@ class RepresentationController extends Controller
         // Sauvegarder la réservation
         $reservation->save();
 
-        // Rediriger vers une page appropriée avec un message de confirmation
-        return redirect()->route('representations.show', $id)->with('success', 'Réservation effectuée avec succès.');
+        return redirect()->route('representation.show', $id)
+            ->with('success', 'Réservation effectuée avec succès.');
     }
 }
