@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
+
+
 class Representation extends Model
 {
     use HasFactory;
@@ -57,5 +61,27 @@ class Representation extends Model
     public function Users()
     {
         return $this->hasMany(User::class);
+    }
+
+
+    public function toFeedItem(): FeedItem
+    {
+        return FeedItem::create([
+            'id' => $this->id,
+            'title' => $this->title,
+            'summary' => $this->show->description,
+            // 'updated' => $this->updated_at, 
+            'link' => route('representation.show', $this->id),
+            //env(URL_APP.'/representation/', $this->id)
+            'authorName' => ("ebru"),
+            //(admin du site, auteur des representation : vendeur des tickets) 
+            'authorEmail' => ("ebru")
+
+        ]);
+    }
+
+    public function getFeedItems()
+    {
+        return Representation::all();
     }
 }

@@ -47,6 +47,7 @@
 @vite(['resources/css/app.css', 'resources/js/app.jsx'])
 
 <body>
+
     @include('components.navbar') <!-- Cela inclut votre menu de navigation -->
     <div class="container">
         @yield('content')

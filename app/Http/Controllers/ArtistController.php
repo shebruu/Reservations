@@ -7,6 +7,8 @@ use App\Models\Artist;
 
 use App\Http\Requests\ArtistRequest;
 
+use Illuminate\Support\Facades\App;
+
 class ArtistController extends Controller
 {
     /**
@@ -14,6 +16,7 @@ class ArtistController extends Controller
      */
     public function index()
     {
+        App::setLocale('fr');
         $artists = Artist::all(); // Récupère tous les artistes
         return view('artists.index', compact('artists'));
     }
