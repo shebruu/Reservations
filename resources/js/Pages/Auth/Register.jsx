@@ -1,14 +1,17 @@
 import { useEffect } from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
+import InputError from '@/Pages/Components/InputError';
+import InputLabel from '@/Pages/Components/InputLabel';
+import PrimaryButton from '@/Pages/Components/PrimaryButton';
+import TextInput from '@/Pages/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
+        firstname: '',
+        lastname: '',
+        login: '',
+        langue: '',
         email: '',
         password: '',
         password_confirmation: '',
@@ -31,38 +34,56 @@ export default function Register() {
             <Head title="Register" />
 
             <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="name" value="Name" />
-
+            <div>
+                    <InputLabel htmlFor="firstname" value="First Name" />
                     <TextInput
-                        id="name"
-                        name="name"
-                        value={data.name}
+                        id="firstname"
+                        name="firstname"
+                        value={data.firstname}
                         className="mt-1 block w-full"
-                        autoComplete="name"
-                        isFocused={true}
-                        onChange={(e) => setData('name', e.target.value)}
+                        onChange={(e) => setData('firstname', e.target.value)}
                         required
                     />
-
-                    <InputError message={errors.name} className="mt-2" />
+                    <InputError message={errors.firstname} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
-
+                    <InputLabel htmlFor="lastname" value="Last Name" />
                     <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
+                        id="lastname"
+                        name="lastname"
+                        value={data.lastname}
                         className="mt-1 block w-full"
-                        autoComplete="username"
-                        onChange={(e) => setData('email', e.target.value)}
+                        onChange={(e) => setData('lastname', e.target.value)}
                         required
                     />
+                    <InputError message={errors.lastname} className="mt-2" />
+                </div>
 
-                    <InputError message={errors.email} className="mt-2" />
+                <div className="mt-4">
+                    <InputLabel htmlFor="login" value="Login" />
+                    <TextInput
+                        id="login"
+                        name="login"
+                        value={data.login}
+                        className="mt-1 block w-full"
+                        onChange={(e) => setData('login', e.target.value)}
+                        required
+                    />
+                    <InputError message={errors.login} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="langue" value="Language" />
+                    <TextInput
+                        id="langue"
+                        name="langue"
+                        value={data.langue}
+                        className="mt-1 block w-full"
+                        onChange={(e) => setData('langue', e.target.value)}
+                        required
+                    />
+                    <InputError message={errors.langue} className="mt-2" />
                 </div>
 
                 <div className="mt-4">

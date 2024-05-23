@@ -48,7 +48,7 @@
 
 <body>
 
-    @include('components.navbar') <!-- Cela inclut votre menu de navigation -->
+    @include('components.navbar')
     <div class="container">
         @yield('content')
     </div>
@@ -56,6 +56,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     @livewireScripts
+
+
 </body>
 
 </html>

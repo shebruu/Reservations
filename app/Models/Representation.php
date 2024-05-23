@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 
+use Illuminate\Support\Carbon;
 
-class Representation extends Model
+
+class Representation extends Model implements Feedable
 {
     use HasFactory;
     /**
@@ -66,22 +68,19 @@ class Representation extends Model
 
     public function toFeedItem(): FeedItem
     {
-        return FeedItem::create([
-            'id' => $this->id,
-            'title' => $this->title,
-            'summary' => $this->show->description,
-            // 'updated' => $this->updated_at, 
-            'link' => route('representation.show', $this->id),
-            //env(URL_APP.'/representation/', $this->id)
-            'authorName' => ("ebru"),
-            //(admin du site, auteur des representation : vendeur des tickets) 
-            'authorEmail' => ("ebru")
-
-        ]);
+        return FeedItem::create()
+            ->id($this->id)
+            ->title($this->show->title) //show a title
+            ->summary($this->show->description)
+            ->updated(Carbon::now())
+            // ->updated($this->updated_at)  ajouter au modele et migration
+            ->link(route('representation.show'), $this->id)
+            ->authorName($this->id)
+            ->authorEmail($this->authorEmail);
     }
 
     public function getFeedItems()
     {
-        return Representation::all();
+        return Representation::all(); //que les representation du mois ds le flux
     }
 }

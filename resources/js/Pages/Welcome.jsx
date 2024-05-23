@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Head } from '@inertiajs/react';
-import Navbar from '../Components/Navbar';
+import Navbar from './Components/Navbar';
 
 export default function Welcome({ auth }) {
     return (

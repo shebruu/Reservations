@@ -47,7 +47,7 @@
         </a>
         <div class="navbar-nav">
             <a class="nav-item nav-link active" href="{{ route('home') }}">Accueil</a>
-            <a class="nav-item nav-link" href="{{ route('artist.index') }}">Artistes</a>
+
             <a class="nav-item nav-link" href="{{ route('show.index') }}">Spectacles</a>
             <a class="nav-item nav-link" href="{{ route('representation.index') }}">Réservations</a>
             <a class="nav-item nav-link" href="{{ route('profile.edit') }}">Profil</a>

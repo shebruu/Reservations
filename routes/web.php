@@ -5,6 +5,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+
+use App\Http\Controllers\Auth\DashboardController;
+
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\LocalityController;
@@ -12,8 +15,16 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\RepresentationController;
+use App\Http\Controllers\AuthenticatedSessionController;
+use Illuminate\Auth\Middleware\Authenticate;
+use Illuminate\Support\Facades\Auth;
 
+
+// Main home route
 Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect()->route('dashboard');
+    }
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -22,26 +33,39 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-})->name('profil');
-/*
-Route::resource('artist', ArtistController::class);
-*/
-/**  user managment route only for admin */
-Route::middleware('isAdmin')->group(function () {
-    Route::get('/admin/users', function () {
-        return view('admin.users');
+
+
+
+
+
+
+// Dashboard route, protected by authentication and verified middleware
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+
+    // Profile management routes, under the same middleware
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 });
 
 
+// Admin-specific routes, protected by 'isAdmin' middleware
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/admin/users', function () {
+        // Assuming 'admin.users' is an Inertia or Blade view
+        return Inertia::render('Admin/Users');
+    })->name('admin.users');
+});
+
+
+
+Route::resource('artist', ArtistController::class);
 Route::get('/artist', [ArtistController::class, 'index'])->name('artist.index');
 
 Route::get('/artist/{id}', [ArtistController::class, 'show'])
@@ -108,4 +132,6 @@ Route::put('/representation/{id}', [RepresentationController::class, 'update'])
 
 Route::post('/representations/{id}/book', [RepresentationController::class, 'book'])->name('representation.book')->middleware('auth');
 
+/**  flux rss  */
+Route::feeds();
 require __DIR__ . '/auth.php';
