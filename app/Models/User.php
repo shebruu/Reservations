@@ -53,7 +53,7 @@ class User extends Authenticatable
     /**
      * Get the role in this User.
      */
-    public function Roles()
+    public function roles()
     {
         return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id');
     }
@@ -70,4 +70,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(Representation::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+
+    // Accessor to include roles in the user data
+    public function getRolesListAttribute()
+    {
+        return $this->roles->pluck('name');
+    }
+    protected $appends = ['roles_list'];
 }

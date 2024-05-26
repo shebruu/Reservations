@@ -22,7 +22,7 @@ class Show extends Model
      */
     public function location()
     {
-        return $this->belongsTo('App\Models\Location', 'location_id');
+        return $this->belongsTo(Location::class, 'location_id');
     }
 
     /**
@@ -38,5 +38,11 @@ class Show extends Model
     public function artistTypes()
     {
         return $this->belongsToMany(ArtistType::class);
+    }
+
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

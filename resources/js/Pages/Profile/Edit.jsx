@@ -5,12 +5,22 @@ import UpdateProfileInformationForm from './Partials/UpdateProfileInformationFor
 import { Head } from '@inertiajs/react';
 
 export default function Edit({ auth, mustVerifyEmail, status }) {
+    const user = auth.user;
+
     return (
         <AuthenticatedLayout
             user={auth.user}
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Profile</h2>}
         >
             <Head title="Profile" />
+
+            <div className="flex items-center justify-center">
+                <img
+                    src={user.photo_url ? `/storage/${user.photo_url}` : '/path/to/default/photo.jpg'}
+                    alt="User Photo"
+                    className="w-24 h-24 rounded-full mx-auto"
+                />
+            </div>
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">

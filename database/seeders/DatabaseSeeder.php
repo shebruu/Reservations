@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Keyword;
 use App\Models\Location;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -34,6 +35,8 @@ class DatabaseSeeder extends Seeder
             ArtistTypeShowSeeder::class,
             RoleUserSeeder::class,
             RepresentationUserSeeder::class,
+            TagSeeder::class,
+            ShowTagSeeder::class,
 
         ]);
     }

@@ -12,13 +12,19 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\LocalityController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ShowController;
+
+
+
 use App\Http\Controllers\RepresentationController;
 use App\Http\Controllers\AuthenticatedSessionController;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Support\Facades\Auth;
 
+
+use App\Http\Controllers\ShowKeyword;
 
 // Main home route
 Route::get('/', function () {
@@ -37,14 +43,12 @@ Route::get('/', function () {
 
 
 
-
-
-
 // Dashboard route, protected by authentication and verified middleware
+
+
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+
 
     // Profile management routes, under the same middleware
     Route::prefix('profile')->group(function () {
@@ -55,6 +59,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 
+
 // Admin-specific routes, protected by 'isAdmin' middleware
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/admin/users', function () {
@@ -62,6 +67,9 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         return Inertia::render('Admin/Users');
     })->name('admin.users');
 });
+
+
+
 
 
 
@@ -131,6 +139,15 @@ Route::put('/representation/{id}', [RepresentationController::class, 'update'])
 
 
 Route::post('/representations/{id}/book', [RepresentationController::class, 'book'])->name('representation.book')->middleware('auth');
+
+
+//Route::get('show/index', ShowController::class)->name('show.getkeywords');
+
+//Route::get('show/{id}/keywords', ShowKeywordController::class)->name('showkeyword.index');
+
+
+
+
 
 /**  flux rss  */
 Route::feeds();

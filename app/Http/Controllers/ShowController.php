@@ -8,6 +8,8 @@ use App\Models\Location;
 
 use App\Http\Requests\ShowRequest;
 
+use App\Models\Tag;
+
 class ShowController extends Controller
 {
 
@@ -16,12 +18,38 @@ class ShowController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $shows = Show::all();
+
+        $query = Show::query();
+
+        // Recherche par nom de spectacle
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%' . $request->input('search') . '%');
+        }
+
+        // Trier par tag
+        if ($request->filled('tag')) {
+            $tag = Tag::where('name', $request->input('tag'))->first();
+            if ($tag) {
+                $query->whereHas('tags', function ($q) use ($tag) {
+                    $q->where('tag_id', $tag->id);
+                });
+            }
+        }
+
+        $shows = $query->get();
+        $tags = Tag::all();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'shows' => view('show.partials.shows', compact('shows'))->render(),
+            ]);
+        }
 
         return view('show.index', [
             'shows' => $shows,
+            'tags' => $tags,
             'resource' => 'spectacles',
         ]);
     }
@@ -54,13 +82,18 @@ class ShowController extends Controller
 
         $show = Show::find($id);
 
+
+
         //Récupérer les artistes du spectacle et les grouper par type
         $collaborateurs = [];
+
 
         foreach ($show->artistTypes as $at) {
             $collaborateurs[$at->type->type][] = $at->artist;
         }
 
+
+        //  dd($collaborateurs);
 
         return view('show.show', [
             'show' => $show,
@@ -69,6 +102,23 @@ class ShowController extends Controller
 
         ]);
     }
+
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $shows = Show::where('title', 'like', '%' . $query . '%')
+            ->orWhereHas('tags', function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%');
+            })
+            ->get();
+
+        return view('show.search_results', [
+            'shows' => $shows,
+            'query' => $query,
+        ]);
+    }
+
 
 
     /**

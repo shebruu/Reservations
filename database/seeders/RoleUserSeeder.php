@@ -40,6 +40,11 @@ class RoleUserSeeder extends Seeder
                 'role' => 'member',
             ],
             [
+                'firstname' => 'Ebru',
+                'lastname' => 'Sahin',
+                'role' => 'member',
+            ],
+            [
                 'firstname' => 'Bob',
                 'lastname' => 'Marley',
                 'role' => 'affiliate',
