@@ -120,9 +120,10 @@ Route::get('/show', [ShowController::class, 'index'])->name('show.index');
 Route::get('/show/{id}', [ShowController::class, 'show'])
     ->where('id', '[0-9]+')->name('show.show');
 
+//todo 
 Route::get('/show/edit/{id}', [ShowController::class, 'edit'])
     ->where('id', '[0-9]+')->name('show.edit');
-Route::put('/show/{id}', [ShowController::class, 'update'])
+Route::patch('/show/{id}', [ShowController::class, 'update'])
     ->where('id', '[0-9]+')->name('show.update');
 
 

@@ -15,6 +15,8 @@
                 @endif
             </p>
             <a href="{{ route('show.show', $show->id) }}" class="btn btn-primary">Voir plus</a>
+
+            <a href="{{ route('show.edit', $show->id)}}" class="btn btn-primary">Editer ce spectacle</a>
         </div>
     </div>
 </div>

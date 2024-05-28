@@ -116,6 +116,8 @@
             </div>
 
             <a href="{{ route('show.index') }}" class="btn btn-primary">Retour à l'index</a>
+
+            <a href="{{ route('show.edit', $show->id)}}" class="btn btn-primary">Editer ce spectacle</a>
         </div>
     </div>
 </div>

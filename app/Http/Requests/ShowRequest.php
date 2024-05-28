@@ -22,7 +22,7 @@ class ShowRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'slug' => 'required|unique:shows|alpha_dash',
+
             'title' => 'required|max:255',
             'description' => 'required',
             'poster_url' => 'sometimes|nullable|url',

@@ -126,7 +126,15 @@ class ShowController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $show = Show::find($id);
+        $locations = Location::all();
+        //dd($locations);
+
+        //route de la vue et non de la route 
+        return view('show.edit', [
+            'show' => $show,
+            'locations' => $locations,
+        ]);
     }
     /**
      * Update the specified resource in storage.
@@ -135,11 +143,21 @@ class ShowController extends Controller
      * @param  \App\Models\Show  $show
      * @return \Illuminate\Http\Response
      */
-    public function update(ShowRequest $request, Show $show)
+    public function update(ShowRequest $request, String $id)
     {
+
+        $show = Show::find($id);
+
+        // Mise à jour des données et sauvegarde dans la base de données avec des données déjà validées.
         $show->update($request->validated());
-        return redirect()->route('show.index')->with('success', 'Spectacle mis à jour avec succès.');
+
+
+        return redirect()->route('show.index', [
+            'show' => $show
+        ])->with('success', 'Spectacle mis à jour avec succès.');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
