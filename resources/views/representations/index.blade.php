@@ -36,7 +36,7 @@
                     <p class="card-text"><strong>Heure:</strong> {{ \Carbon\Carbon::parse($representation->when)->format('G:i') }}</p>
                     <p class="card-text"><strong>Prix:</strong> {{ $representation->show->price }} €</p>
                     <div class="d-flex justify-content-between align-items-center">
-                        <a href="{{ route('representation.show', $representation->id) }}" class="btn btn-primary">Détails</a>
+                        <a href="{{ route('representation.show', $representation->id) }}" class="btn btn-primary">Reserver</a>
                     </div>
                 </div>
             </div>

@@ -19,6 +19,7 @@ use App\Http\Controllers\ShowController;
 
 
 use App\Http\Controllers\RepresentationController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AuthenticatedSessionController;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Support\Facades\Auth;
@@ -136,9 +137,14 @@ Route::get('/representation/{id}', [RepresentationController::class, 'show'])
 
 
 
-
-Route::post('/representations/{id}/book', [RepresentationController::class, 'book'])->name('representation.book')->middleware('auth');
-
+// Routes pour les réservations
+Route::post('/representation/{id}/choose-places', [ReservationController::class, 'choosePlaces'])->where('id', '[0-9]+')->name('representation.choose-places')->middleware('auth');
+Route::get('/representation/{id}/payment', [ReservationController::class, 'payment'])
+    ->where('id', '[0-9]+')->name('representation.payment')->middleware('auth');
+Route::post('/representation/{id}/book', [ReservationController::class, 'book'])
+    ->where('id', '[0-9]+')->name('representation.book')->middleware('auth');
+Route::get('/reservation/confirmation/{id}', [ReservationController::class, 'confirmation'])
+    ->where('id', '[0-9]+')->name('reservation.confirmation')->middleware('auth');
 
 //Route::get('show/index', ShowController::class)->name('show.getkeywords');
 
