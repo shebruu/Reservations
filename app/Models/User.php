@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class User extends Authenticatable
 {
@@ -53,15 +55,16 @@ class User extends Authenticatable
     /**
      * Get the role in this User.
      */
-    public function roles()
+    public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id');
     }
 
-    public function hasRole($role)
+    public function hasRole(string $role): bool
     {
         return $this->roles()->where('role', $role)->exists();
     }
+
 
     /**
      * Get the representations in this User.

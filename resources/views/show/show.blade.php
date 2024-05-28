@@ -39,6 +39,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
+
             <div class="card mb-4">
                 @if($show->poster_url)
                 <img src="{{ asset('images/'.$show->poster_url) }}" class="card-img-top show-detail-img" alt="{{ $show->title }}">
@@ -117,7 +118,7 @@
 
             <a href="{{ route('show.index') }}" class="btn btn-primary">Retour à l'index</a>
 
-            <a href="{{ route('show.edit', $show->id)}}" class="btn btn-primary">Editer ce spectacle</a>
+            <a href="{{ route('show.index', $show->id)}}" class="btn btn-primary">Editer ce spectacle</a>
         </div>
     </div>
 </div>

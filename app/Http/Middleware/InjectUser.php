@@ -26,6 +26,7 @@ class InjectUser
 
         if (auth()->check()) {
             $user = auth()->user()->load('roles');
+            echo $user->roles()->pluck('name')
             $user->roles_list = $user->roles->pluck('name'); // Ensure roles are included
             $request->merge(['user' => $user]);
         }

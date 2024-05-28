@@ -15,6 +15,15 @@
 @section('content')
 <div class="container mt-5">
     <h1 class="text-center mb-4">Liste des spectacles</h1>
+    @if(auth()->check())
+    <p>Bonjour, {{ auth()->user()->firstname }}!</p>
+    <p>Votre email: {{ auth()->user()->email }}</p>
+    <p>Votre rôle: {{ auth()->user()->roles->pluck('role')->implode(', ') }}</p>
+    @endif
+
+
+
+
 
     <!-- Formulaire de recherche et de tri -->
     <form id="searchForm" class="mb-4">

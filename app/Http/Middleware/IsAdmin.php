@@ -6,6 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+use Illuminate\Support\Facades\Auth;
+
 class IsAdmin
 {
     /**
@@ -16,10 +18,11 @@ class IsAdmin
 
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check() && auth()->user()->is_admin) {
+
+        if (auth()->check() && auth()->user()->hasRole('admin')) {
             return $next($request);
         }
 
-        abort(403, 'Accès non autorisé.');
+        return redirect('/')->with('error', 'Vous n\'avez pas accès à cette page.');
     }
 }

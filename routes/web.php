@@ -121,6 +121,7 @@ Route::get('/show/{id}', [ShowController::class, 'show'])
     ->where('id', '[0-9]+')->name('show.show');
 
 //todo 
+
 Route::get('/show/edit/{id}', [ShowController::class, 'edit'])
     ->where('id', '[0-9]+')->name('show.edit');
 Route::patch('/show/{id}', [ShowController::class, 'update'])
@@ -133,10 +134,7 @@ Route::get('/representation', [RepresentationController::class, 'index'])
 Route::get('/representation/{id}', [RepresentationController::class, 'show'])
     ->where('id', '[0-9]+')->name('representation.show');
 
-Route::get('/representation/edit/{id}', [RepresentationController::class, 'edit'])
-    ->where('id', '[0-9]+')->name('representation.edit');
-Route::put('/representation/{id}', [RepresentationController::class, 'update'])
-    ->where('id', '[0-9]+')->name('representation.update');
+
 
 
 Route::post('/representations/{id}/book', [RepresentationController::class, 'book'])->name('representation.book')->middleware('auth');

@@ -6,17 +6,6 @@
 <article class="container mt-5">
 
 
-    @can('can-reserve')
-    <p>L'utilisateur peut réserver.</p>
-    <p>Rôles actuels:</p>
-    <ul>
-        @foreach(Auth::user()->roles as $role)
-        <li>{{ $role->role }}</li>
-        @endforeach
-    </ul>
-    @else
-    <p>L'utilisateur ne peut pas réserver.</p>
-    @endcan
 
 
 

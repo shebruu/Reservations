@@ -31,6 +31,7 @@
 
 @section('content')
 <div class="container mt-5">
+
     <h1 class="text-center page-heading">Liste des artistes</h1>
     <a href="{{ route('artist.create') }}" class="btn btn-success mb-3">Ajouter un nouvel artiste</a>
     <div class="table-responsive">
