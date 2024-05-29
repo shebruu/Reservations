@@ -6,6 +6,9 @@
 /public/storage
 /storage/*.key
 /vendor
+controllers/reservation/*
+app/Http/Controllers/ReservationController.php
+resources/views/reservations/
 .env
 .env.backup
 .env.production
