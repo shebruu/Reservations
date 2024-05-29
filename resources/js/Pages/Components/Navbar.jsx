@@ -11,12 +11,13 @@ const Navbar = ({ user }) => {
                     <img src="/images/logo_transparent.png" alt="Logo" className="h-36 mr-3" />
                 </InertiaLink>
                 <div className="flex">
+                <InertiaLink className="text-gray-800 dark:text-white px-3 py-2" href={route("home")}>
+                        Acceuil
+                    </InertiaLink>
                     <InertiaLink className="text-gray-800 dark:text-white px-3 py-2" href={route("show.index")}>
                         Spectacles
                     </InertiaLink>
-                    <InertiaLink className="text-gray-800 dark:text-white px-3 py-2" href={route("representation.index")}>
-                        Réservations
-                    </InertiaLink>
+                 
                     <div className="relative">
                         {user && user.id ? (
                             <InertiaLink as="button" method="post" href={route("logout")} className="text-gray-800 dark:text-white px-3 py-2">

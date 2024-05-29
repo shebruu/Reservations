@@ -5,8 +5,9 @@
     position: fixed;
     height: 100%;
     overflow-y: auto;
-
-   
+    left: 0;
+    top: 0;
+    bottom: 0;
 }
 
 .sidebar-link {
@@ -26,9 +27,4 @@
 .sidebar img {
     display: block;
     margin: 0 auto 20px;
-}
-
-.main-content {
-    margin-left: 252px; /* La largeur du sidebar + 2px de décalage */
-    padding: 20px;
 }

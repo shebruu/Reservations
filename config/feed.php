@@ -11,22 +11,26 @@ return [
              *
              * You can also pass an argument to that method. Note that their key must be the name of the parameter:
              * [App\Model::class, 'getAllFeedItems', 'parameterName' => 'argument']
+             * modele qui va etre publié 
              */
             'items' => 'App\Models\Representation@getFeedItems',
 
             /*
              * The feed will be available on this url.
+             * titre du flux 
              */
             'url' => '/feed',
 
-            'title' => 'My feed',
-            'description' => 'The description of the feed.',
+            'title' => 'Représentations du mois ',
+            'description' => 'Liste de toutes les representations du mois ',
             'language' => 'en-US',
 
             /*
              * The image to display for the feed. For Atom feeds, this is displayed as
              * a banner/logo; for RSS and JSON feeds, it's displayed as an icon.
              * An empty value omits the image attribute from the feed.
+             * 
+             * image de banniere du flux 
              */
             'image' => '',
 
@@ -37,6 +41,7 @@ return [
 
             /*
              * The view that will render the feed.
+             * les vues du vendor, personnalisable 
              */
             'view' => 'feed::atom',
 

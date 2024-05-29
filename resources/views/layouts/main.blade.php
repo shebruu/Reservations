@@ -5,7 +5,10 @@
     <meta charset="utf-8">
     <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('css/sidebarstyle.css') }}" rel="stylesheet"> <!-- Inclure le fichier CSS du sidebar -->
 
+
+    @include('feed::links')
     <style>
         .custom-img-size {
             height: 200px;
@@ -28,18 +31,36 @@
         .card-footer .btn {
             margin-top: auto;
         }
+
+        h1 {
+            font-size: 2.5rem !important;
+            /* Taille de police pour le titre */
+            font-weight: 700 !important;
+            /* Poids de police pour le titre */
+        }
+
+        .content {
+            margin-left: 252px;
+            /* La largeur du sidebar + 2px de décalage */
+            padding: 20px;
+        }
     </style>
     @stack('styles')
     @livewireStyles
 </head>
 
 <body>
-    <div id="app" data-user="{{ Auth::check() ? json_encode(Auth::user()) : '{}' }}">
-        <!-- React will render here -->
-    </div>
-
-    <div class="container">
-        @yield('content')
+    <div class="container-fluid">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            @include('sidebar')
+        </div>
+        <!-- Main content -->
+        <div class="content">
+            <div class="container mt-5">
+                @yield('content')
+            </div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

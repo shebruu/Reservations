@@ -21,10 +21,6 @@
     <p>Votre rôle: {{ auth()->user()->roles->pluck('role')->implode(', ') }}</p>
     @endif
 
-
-
-
-
     <!-- Formulaire de recherche et de tri -->
     <form id="searchForm" class="mb-4">
         <div class="row g-3">
@@ -43,7 +39,30 @@
     </form>
 
     <div class="row row-cols-1 row-cols-md-3 g-4" id="showsContainer">
-        @include('show.partials.shows', ['shows' => $shows])
+        @foreach($shows as $show)
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{ asset('images/'.$show->poster_url) }}" class="card-img-top custom-img-size" alt="Image du spectacle">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $show->title }}</h5>
+                    <p class="card-text">{{ $show->price }} €</p>
+                    <p class="card-text">
+                        @if($show->representations->count() === 1)
+                        1 représentation
+                        @elseif($show->representations->count() > 1)
+                        {{ $show->representations->count() }} représentations
+                        @else
+                        aucune représentation
+                        @endif
+                    </p>
+                    <a href="{{ route('show.show', $show->id) }}" class="btn btn-primary">Voir plus</a>
+                    @if(auth()->check() && auth()->user()->hasRole('admin'))
+                    <a href="{{ route('show.edit', $show->id) }}" class="btn btn-primary">Éditer ce spectacle</a>
+                    @endif
+                </div>
+            </div>
+        </div>
+        @endforeach
     </div>
 </div>
 

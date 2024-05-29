@@ -51,13 +51,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 
 
-    // Profile management routes, under the same middleware
+    // Profile management routes, under the same middleware : ProfileController
     Route::prefix('profile')->group(function () {
-        Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        Route::get('/', [ProfileController::class, 'show'])->name('profile.show');
+        Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/edit', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/delete', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        Route::post('/upload-photo', [ProfileController::class, 'uploadPhoto'])->name('profile.uploadPhoto');
     });
 });
+
 
 
 
@@ -133,7 +136,7 @@ Route::patch('/show/{id}', [ShowController::class, 'update'])
 Route::get('/representation', [RepresentationController::class, 'index'])
     ->name('representation.index');
 Route::get('/representation/{id}', [RepresentationController::class, 'show'])
-    ->where('id', '[0-9]+')->name('representation.show');
+    ->name('representation.show');
 
 
 
@@ -146,11 +149,19 @@ Route::post('/representation/{id}/book', [ReservationController::class, 'book'])
 Route::get('/reservation/confirmation/{id}', [ReservationController::class, 'confirmation'])
     ->where('id', '[0-9]+')->name('reservation.confirmation')->middleware('auth');
 
-//Route::get('show/index', ShowController::class)->name('show.getkeywords');
-
-//Route::get('show/{id}/keywords', ShowKeywordController::class)->name('showkeyword.index');
 
 
+
+Route::get('representation/{id}/payment', [ReservationController::class, 'payment'])->name('representation.payment');
+Route::post('representation/{id}/create-checkout-session', [ReservationController::class, 'createCheckoutSession'])->name('representation.create-checkout-session');
+Route::get('payment/success', [ReservationController::class, 'success'])->name('payment.success');
+Route::get('payment/cancel', [ReservationController::class, 'cancel'])->name('payment.cancel');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/reservation/mesreservations', [ReservationController::class, 'MesReservations'])
+        ->name('reservation.mesreservations');
+});
 
 
 

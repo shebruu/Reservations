@@ -68,19 +68,23 @@ class Representation extends Model implements Feedable
 
     public function toFeedItem(): FeedItem
     {
+        $url = route('representation.show', $this->id);
         return FeedItem::create()
             ->id($this->id)
             ->title($this->show->title) //show a title
             ->summary($this->show->description)
             ->updated(Carbon::now())
             // ->updated($this->updated_at)  ajouter au modele et migration
-            ->link(route('representation.show'), $this->id)
-            ->authorName($this->id)
-            ->authorEmail($this->authorEmail);
+            ->link(route('representation.show',  $this->id))
+            ->authorName("bob sull ")
+            ->authorEmail("bobsull@sull.com");
     }
 
     public function getFeedItems()
     {
-        return Representation::all(); //que les representation du mois ds le flux
+
+
+        return Representation::whereYear('when', date('Y'))
+            ->whereMonth('when', date('n'))->get();
     }
 }

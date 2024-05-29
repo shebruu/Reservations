@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
+
 export default function Dashboard({ user, upcomingEvents }) {
     return (
         <AuthenticatedLayout
@@ -17,7 +18,7 @@ export default function Dashboard({ user, upcomingEvents }) {
                             className="w-10 h-10 rounded-full"
                         />
                         <span className="ml-4 text-white">
-                            Rôle: {user.role_list ? user.role_list.join(', ') : 'Aucun rôle'}
+                            {user.role_list ? user.role_list.join(', ') : 'Aucun rôle'}
                         </span>
                     </div>
                 </div>

@@ -25,7 +25,7 @@ class User extends Authenticatable
         'email',
         'password',
         'login',
-
+        'photo_url',
         'langue',
     ];
 
@@ -83,7 +83,9 @@ class User extends Authenticatable
     // Accessor to include roles in the user data
     public function getRolesListAttribute()
     {
-        return $this->roles->pluck('name');
+        return $this->roles->pluck('role');
     }
+
+
     protected $appends = ['roles_list'];
 }
