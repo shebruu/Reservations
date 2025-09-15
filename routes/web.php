@@ -4,28 +4,22 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
-
-use App\Http\Controllers\Auth\DashboardController;
-
-use App\Http\Controllers\ArtistController;
-use App\Http\Controllers\TypeController;
-use App\Http\Controllers\LocalityController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\LocationController;
-use App\Http\Controllers\ShowController;
-
-
-
-use App\Http\Controllers\RepresentationController;
-use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\AuthenticatedSessionController;
-use Illuminate\Auth\Middleware\Authenticate;
+use App\Http\Controllers\{
+    Auth\DashboardController,
+    ArtistController,
+    TypeController,
+    LocalityController,
+    RoleController,
+    UserController,
+    LocationController,
+    ShowController,
+    RepresentationController,
+    ReservationController,
+    ShowKeyword
+};
 use Illuminate\Support\Facades\Auth;
 
 
-use App\Http\Controllers\ShowKeyword;
 
 // Main home route
 Route::get('/', function () {
@@ -76,7 +70,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
 
 
-
+/*
 Route::resource('artist', ArtistController::class);
 Route::get('/artist', [ArtistController::class, 'index'])->name('artist.index');
 
@@ -97,6 +91,8 @@ Route::get('/artist/create', [ArtistController::class, 'create'])
 Route::post('/artist', [ArtistController::class, 'store'])
     ->name('artist.store');
 
+*/
+Route::resource('artist', ArtistController::class);
 
 
 
@@ -104,17 +100,7 @@ Route::get('/type', [TypeController::class, 'index'])->name('type.index');
 Route::get('/type/{id}', [TypeController::class, 'show'])
     ->where('id', '[0-9]+')->name('type.show');
 
-Route::get('/locality', [LocalityController::class, 'index'])->name('locality_index');
-Route::get('/locality/{id}', [LocalityController::class, 'show'])
-    ->where('id', '[0-9]+')->name('locality.show');
 
-Route::get('/role', [RoleController::class, 'index'])->name('role.index');
-Route::get('/role/{id}', [RoleController::class, 'show'])
-    ->where('id', '[0-9]+')->name('role.show');
-
-Route::get('location', [LocationController::class, 'index'])->name('location.index');
-Route::get('location/{id}', [LocationController::class, 'show'])
-    ->where('id', '[0-9]+')->name('location.show');
 
 
 
@@ -123,8 +109,6 @@ Route::get('location/{id}', [LocationController::class, 'show'])
 Route::get('/show', [ShowController::class, 'index'])->name('show.index');
 Route::get('/show/{id}', [ShowController::class, 'show'])
     ->where('id', '[0-9]+')->name('show.show');
-
-//todo 
 
 Route::get('/show/edit/{id}', [ShowController::class, 'edit'])
     ->where('id', '[0-9]+')->name('show.edit');
@@ -141,28 +125,16 @@ Route::get('/representation/{id}', [RepresentationController::class, 'show'])
 
 
 // Routes pour les réservations
-Route::post('/representation/{id}/choose-places', [ReservationController::class, 'choosePlaces'])->where('id', '[0-9]+')->name('representation.choose-places')->middleware('auth');
-Route::get('/representation/{id}/payment', [ReservationController::class, 'payment'])
-    ->where('id', '[0-9]+')->name('representation.payment')->middleware('auth');
-Route::post('/representation/{id}/book', [ReservationController::class, 'book'])
-    ->where('id', '[0-9]+')->name('representation.book')->middleware('auth');
-Route::get('/reservation/confirmation/{id}', [ReservationController::class, 'confirmation'])
-    ->where('id', '[0-9]+')->name('reservation.confirmation')->middleware('auth');
-
-
-
-
-Route::get('representation/{id}/payment', [ReservationController::class, 'payment'])->name('representation.payment');
-Route::post('representation/{id}/create-checkout-session', [ReservationController::class, 'createCheckoutSession'])->name('representation.create-checkout-session');
-Route::get('payment/success', [ReservationController::class, 'success'])->name('payment.success');
-Route::get('payment/cancel', [ReservationController::class, 'cancel'])->name('payment.cancel');
-
-
 Route::middleware(['auth'])->group(function () {
-    Route::get('/reservation/mesreservations', [ReservationController::class, 'MesReservations'])
-        ->name('reservation.mesreservations');
+    Route::post('/representation/{id}/choose-places', [ReservationController::class, 'choosePlaces'])->where('id', '[0-9]+')->name('representation.choose-places');
+    Route::get('/representation/{id}/payment', [ReservationController::class, 'payment'])->where('id', '[0-9]+')->name('representation.payment');
+    Route::post('/representation/{id}/book', [ReservationController::class, 'book'])->where('id', '[0-9]+')->name('representation.book');
+    Route::get('/reservation/confirmation/{id}', [ReservationController::class, 'confirmation'])->where('id', '[0-9]+')->name('reservation.confirmation');
+    Route::get('/reservation/mesreservations', [ReservationController::class, 'MesReservations'])->name('reservation.mesreservations');
 });
 
+Route::get('payment/success', [ReservationController::class, 'success'])->name('payment.success');
+Route::get('payment/cancel', [ReservationController::class, 'cancel'])->name('payment.cancel');
 
 
 /**  flux rss  */

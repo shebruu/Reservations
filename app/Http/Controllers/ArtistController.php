@@ -17,7 +17,7 @@ class ArtistController extends Controller
     public function index()
     {
         App::setLocale('fr');
-        $artists = Artist::all(); // Récupère tous les artistes
+        $artists = Artist::all();
         return view('artists.index', compact('artists'));
     }
     /**

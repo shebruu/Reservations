@@ -9,7 +9,7 @@ class Kernel extends HttpKernel
     // ...
 
     protected $middleware = [
-        // Liste des middlewares globaux
+        \App\Http\Middleware\ContentSecurityPolicy::class,
     ];
 
     protected $middlewareGroups = [

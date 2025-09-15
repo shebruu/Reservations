@@ -15,25 +15,23 @@
 @section('content')
 <div class="container mt-5">
     <h1 class="text-center mb-4">Liste des spectacles</h1>
-    @if(auth()->check())
-    <p>Bonjour, {{ auth()->user()->firstname }}!</p>
-    <p>Votre email: {{ auth()->user()->email }}</p>
-    <p>Votre rôle: {{ auth()->user()->roles->pluck('role')->implode(', ') }}</p>
-    @endif
 
     <!-- Formulaire de recherche et de tri -->
-    <form id="searchForm" class="mb-4">
+    <form id="searchForm" class="mb-4" method="GET" action="{{ route('show.index') }}">
         <div class="row g-3">
             <div class="col-md-6">
                 <input type="text" name="search" id="search" class="form-control" placeholder="Recherche par nom de spectacle" value="{{ request('search') }}">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <select name="tag" id="tag" class="form-control">
                     <option value="">Trier par tag</option>
                     @foreach($tags as $tag)
                     <option value="{{ $tag->name }}" {{ request('tag') == $tag->name ? 'selected' : '' }}>{{ $tag->name }}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary">Trier</button>
             </div>
         </div>
     </form>
@@ -87,7 +85,13 @@
                 });
         }
 
-        searchInput.addEventListener('input', fetchShows);
+        searchInput.addEventListener('input', function() {
+            clearTimeout(this.delay);
+            this.delay = setTimeout(function() {
+                fetchShows();
+            }, 300);
+        });
+
         tagSelect.addEventListener('change', fetchShows);
     });
 </script>

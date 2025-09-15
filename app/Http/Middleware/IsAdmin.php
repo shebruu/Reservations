@@ -16,11 +16,11 @@ class IsAdmin
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
 
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
 
-        if (auth()->check() && auth()->user()->hasRole('admin')) {
-            return $next($request);
+        if (!Auth::check() || !Auth::user()->is_admin) {
+            return redirect()->route('home')->withErrors('You do not have access to this page.');
         }
 
         return redirect('/')->with('error', 'Vous n\'avez pas accès à cette page.');
